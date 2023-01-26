@@ -2,9 +2,9 @@
 __pycache__/
 *.py[cod]
 *$py.class
-*.vscode
+.vscode/
 LICENSE
-*.graphic_arts
+graphic_arts/
 
 # C extensions
 *.so

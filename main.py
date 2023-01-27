@@ -41,7 +41,7 @@ class Warrior(Character):
     RANGE_VALUE_ATTACK = (3, 5)
     RANGE_VALUE_DEFENCE = (5, 10)
     SPECIAL_BUFF = DEFAULT_STAMINA + 25
-    SPECIAL_SKILL = 'Выносливость'
+    SPECIAL_SKILL = 'Выносливость' 
 
 class Mage(Character):
 
@@ -66,23 +66,13 @@ warrior = Warrior('Кодослав')
 mage = Mage('Джайна')
 healer = Healer('Андуин')
 
-"""
-print(warrior)
-print(warrior.attack())
-print()
-print(mage)
-print(mage.attack())
-print()
-print(healer)
-print(healer.attack())
-"""
 
 def choice_char_class(char_name: str) -> Character:
     """
     Возвращает строку с выбранным
     классом персонажа.
     """
-    # Добавили словарь, в котором соотносится ввод пользователя и класс персонажа.
+    # Добавил словарь, в котором соотносится ввод пользователя и класс персонажа.
     game_classes = {'warrior': Warrior, 'mage': Mage, 'healer': Healer}
     
     approve_choice: str  = None
@@ -99,3 +89,31 @@ def choice_char_class(char_name: str) -> Character:
                                'чтобы выбрать другого персонажа ').lower()
     return char_class 
 
+
+def start_training(character):
+    """
+    Принимает на вход имя и класс персонажа.
+    Возвращает сообщения о результатах цикла тренировки персонажа.
+    """
+    
+    commands = {'attack': character.attack(), 
+                'defence': character.defence(), 
+                'special': character.special()
+                }
+    # Замените конструкцию условных операторов на словарь.
+    
+    print('Потренируйся управлять своими навыками.')
+    print('Введи одну из команд: attack — чтобы атаковать противника, '
+          'defence — чтобы блокировать атаку противника или '
+          'special — чтобы использовать свою суперсилу.')
+    print('Если не хочешь тренироваться, введи команду skip.')
+    cmd = None
+    while cmd != 'skip':
+        cmd = input('Введи команду: ')
+        # Вместо блока условных операторов добавьте условие
+        # принадлежности введённой команды словарю.
+        # В функции print() будет вызываться метод класса,
+        # который соответствует введённой команде.
+        if cmd in commands:
+            print(commands[cmd]())
+    return 'Тренировка окончена.'
